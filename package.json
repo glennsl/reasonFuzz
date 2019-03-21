@@ -1,6 +1,6 @@
 {
   "name": "reasonfuzz",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Fuzzy string matching for ReasonML.",
   "esy": {
     "build": "refmterr dune build --root . -j4",
