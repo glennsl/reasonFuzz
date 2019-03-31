@@ -22,6 +22,9 @@ let pathIndexMatch = Matchers.Path.fuzzyIndicies;
 let fuzzySortArray = Matchers.Wrappers.fuzzySortArray;
 let fuzzySortList = Matchers.Wrappers.fuzzySortList;
 
+/* Helpers */
+let compareScores = Matchers.Wrappers.compareScores;
+
 /* Types */
 module MatchResult = Matchers.Types.MatchResult;
 module IndexMatchResult = Matchers.Types.IndexMatchResult;
