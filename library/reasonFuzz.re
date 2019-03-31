@@ -18,11 +18,8 @@ let pathFuzzyMatch = Matchers.Path.fuzzyMatch;
 /* A path specific fuzzy matcher that will return both a score, and the match locations. */
 let pathIndexMatch = Matchers.Path.fuzzyIndicies;
 
-/* Matcher helpers */
-let compareInputs = Matchers.Helpers.compareInputs;
-let indexCompareInputs = Matchers.Helpers.indexCompareInputs;
-
-let compareEqualScore = Matchers.Helpers.compareEqualScore;
+/* Wrappers */
+let fuzzySortArray = Matchers.Wrappers.fuzzySortArray;
 
 /* Types */
 module MatchResult = Matchers.Types.MatchResult;

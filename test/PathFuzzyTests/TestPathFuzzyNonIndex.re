@@ -49,11 +49,7 @@ describe("Path : Match scores should be correct.", ({test, _}) => {
       "packages/core/test/oni/main.tex",
     |];
 
-    let resultArray = Array.copy(testInputs);
-    Array.sort(
-      (a, b) => compareInputs(a, b, testPattern, pathFuzzyMatch),
-      resultArray,
-    );
+    let resultArray = fuzzySortArray(testInputs, testPattern, pathFuzzyMatch);
 
     expect.equal(resultArray[0], testInputs[0]);
   });
@@ -67,11 +63,7 @@ describe("Path : Match scores should be correct.", ({test, _}) => {
 
     let testPattern = "aBE";
 
-    let resultArray = Array.copy(testInputs);
-    Array.sort(
-      (a, b) => compareInputs(a, b, testPattern, pathFuzzyMatch),
-      resultArray,
-    );
+    let resultArray = fuzzySortArray(testInputs, testPattern, pathFuzzyMatch);
 
     expect.equal(resultArray[0], testInputs[2]);
   });
@@ -79,11 +71,7 @@ describe("Path : Match scores should be correct.", ({test, _}) => {
   test("Works for large input", ({expect}) => {
     let testPattern = "quickOpenScore";
 
-    let resultArray = Array.copy(TestArray.testInput);
-    Array.sort(
-      (a, b) => compareInputs(a, b, testPattern, pathFuzzyMatch),
-      resultArray,
-    );
+    let resultArray = fuzzySortArray(TestArray.testInput, testPattern, pathFuzzyMatch);
 
     expect.equal(
       resultArray[0],
@@ -94,11 +82,7 @@ describe("Path : Match scores should be correct.", ({test, _}) => {
   test("Works for Oni src input", ({expect}) => {
     let testPattern = "token";
 
-    let resultArray = Array.copy(TestArray.oniTestInput);
-    Array.sort(
-      (a, b) => compareInputs(a, b, testPattern, pathFuzzyMatch),
-      resultArray,
-    );
+    let resultArray = fuzzySortArray(TestArray.oniTestInput, testPattern, pathFuzzyMatch);
 
     expect.equal(resultArray[0], "src/editor/Model/Tokenizer.re");
   });
@@ -106,11 +90,7 @@ describe("Path : Match scores should be correct.", ({test, _}) => {
   test("Work for even larger input", ({expect}) => {
     let testPattern = "gpio-regulator";
 
-    let resultArray = Array.copy(TestArray.linuxTest);
-    Array.sort(
-      (a, b) => compareInputs(a, b, testPattern, pathFuzzyMatch),
-      resultArray,
-    );
+    let resultArray = fuzzySortArray(TestArray.linuxTest, testPattern, pathFuzzyMatch);
 
     expect.equal(resultArray[0], "./drivers/regulator/gpio-regulator.c");
   });
