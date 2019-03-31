@@ -21,8 +21,8 @@ let splitArray = (inputArray: array('a), midPoint: int) => {
 };
 
 let compareEqualScore = (line1, line2) => {
-  let score1Better = 1;
-  let score2Better = (-1);
+  let score1Better = (-1);
+  let score2Better = 1;
   let scoreEqual = 0;
 
   let finalScore = ref(scoreEqual);
