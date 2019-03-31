@@ -94,6 +94,6 @@ let compareInputs =
   if (score1 != score2) {
     compare(score2, score1);
   } else {
-    compareEqualScore(line1, line2);
+    compareEqualScore(line1, line2) * (-1);
   };
 };
