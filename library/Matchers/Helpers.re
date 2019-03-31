@@ -74,7 +74,7 @@ let indexCompareInputs =
      * the opposite. This will return 1 if score1 is better, so we need to
      * invert it.
      */
-    compareEqualScore(line1, line2) * -1;
+    compareEqualScore(line1, line2) * (-1);
   };
 };
 
