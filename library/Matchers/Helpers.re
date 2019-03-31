@@ -21,8 +21,8 @@ let splitArray = (inputArray: array('a), midPoint: int) => {
 };
 
 let compareEqualScore = (line1, line2) => {
-  let score1Better = (-1);
-  let score2Better = 1;
+  let score1Better = 1;
+  let score2Better = (-1);
   let scoreEqual = 0;
 
   let finalScore = ref(scoreEqual);
@@ -69,7 +69,12 @@ let indexCompareInputs =
   if (score1 != score2) {
     compare(score2, score1);
   } else {
-    compareEqualScore(line1, line2);
+    /*
+     * Compare above will return 1 if score2 is greater than score1 and -1 for
+     * the opposite. This will return 1 if score1 is better, so we need to
+     * invert it.
+     */
+    compareEqualScore(line1, line2) * -1;
   };
 };
 
