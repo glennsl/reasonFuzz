@@ -48,15 +48,15 @@ let compareEqualScore = (line1, line2) => {
 
 /* Compare two matches */
 type indexfuzzyMatcher =
-  (~line: string, ~query: string) => option(Types.IndexMatchResult.t);
+  (~line: string, ~pattern: string) => option(Types.IndexMatchResult.t);
 type fuzzyMatcher =
-  (~line: string, ~query: string) => option(Types.MatchResult.t);
+  (~line: string, ~pattern: string) => option(Types.MatchResult.t);
 
 /* Return the compare result on the two inputs */
 let indexCompareInputs =
-    (line1: string, line2: string, query: string, scorer: indexfuzzyMatcher) => {
-  let scoreResult1 = scorer(~line=line1, ~query);
-  let scoreResult2 = scorer(~line=line2, ~query);
+    (line1: string, line2: string, pattern: string, scorer: indexfuzzyMatcher) => {
+  let scoreResult1 = scorer(~line=line1, ~pattern);
+  let scoreResult2 = scorer(~line=line2, ~pattern);
 
   let (score1, score2) =
     switch (scoreResult1, scoreResult2) {
@@ -74,9 +74,9 @@ let indexCompareInputs =
 };
 
 let compareInputs =
-    (line1: string, line2: string, query: string, scorer: fuzzyMatcher) => {
-  let scoreResult1 = scorer(~line=line1, ~query);
-  let scoreResult2 = scorer(~line=line2, ~query);
+    (line1: string, line2: string, pattern: string, scorer: fuzzyMatcher) => {
+  let scoreResult1 = scorer(~line=line1, ~pattern);
+  let scoreResult2 = scorer(~line=line2, ~pattern);
 
   let (score1, score2) =
     switch (scoreResult1, scoreResult2) {
