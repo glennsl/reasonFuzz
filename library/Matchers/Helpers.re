@@ -19,3 +19,76 @@ let splitArray = (inputArray: array('a), midPoint: int) => {
 
   (firstHalf, lastHalf);
 };
+
+let compareEqualScore = (line1, line2) => {
+  let score1Better = 1;
+  let score2Better = (-1);
+  let scoreEqual = 0;
+
+  let finalScore = ref(scoreEqual);
+
+  /* First, lets favour the shorter one */
+  if (String.length(line1) != String.length(line2)) {
+    if (String.length(line1) < String.length(line2)) {
+      finalScore := score1Better;
+    } else {
+      finalScore := score2Better;
+    };
+  };
+
+  /*
+   * Is there anything else we should consider here?
+   * For an index match, prefer compact ones?
+   * For either, we could pass over counts of types of matches?
+   *    Prefer camelcase etc.
+   */
+
+  finalScore^;
+};
+
+/* Compare two matches */
+type indexfuzzyMatcher =
+  (~line: string, ~query: string) => option(Types.IndexMatchResult.t);
+type fuzzyMatcher =
+  (~line: string, ~query: string) => option(Types.MatchResult.t);
+
+/* Return the compare result on the two inputs */
+let indexCompareInputs =
+    (line1: string, line2: string, query: string, scorer: indexfuzzyMatcher) => {
+  let scoreResult1 = scorer(~line=line1, ~query);
+  let scoreResult2 = scorer(~line=line2, ~query);
+
+  let (score1, score2) =
+    switch (scoreResult1, scoreResult2) {
+    | (Some(s1), Some(s2)) => (s1.score, s2.score)
+    | (None, Some(s2)) => (Types.awfulScore, s2.score)
+    | (Some(s1), None) => (s1.score, Types.awfulScore)
+    | (_, _) => (Types.awfulScore, Types.awfulScore)
+    };
+
+  if (score1 != score2) {
+    compare(score2, score1);
+  } else {
+    compareEqualScore(line1, line2);
+  };
+};
+
+let compareInputs =
+    (line1: string, line2: string, query: string, scorer: fuzzyMatcher) => {
+  let scoreResult1 = scorer(~line=line1, ~query);
+  let scoreResult2 = scorer(~line=line2, ~query);
+
+  let (score1, score2) =
+    switch (scoreResult1, scoreResult2) {
+    | (Some(s1), Some(s2)) => (s1.score, s2.score)
+    | (None, Some(s2)) => (Types.awfulScore, s2.score)
+    | (Some(s1), None) => (s1.score, Types.awfulScore)
+    | (_, _) => (Types.awfulScore, Types.awfulScore)
+    };
+
+  if (score1 != score2) {
+    compare(score2, score1);
+  } else {
+    compareEqualScore(line1, line2);
+  };
+};
