@@ -20,6 +20,7 @@ let pathIndexMatch = Matchers.Path.fuzzyIndicies;
 
 /* Wrappers */
 let fuzzySortArray = Matchers.Wrappers.fuzzySortArray;
+let fuzzySortList = Matchers.Wrappers.fuzzySortList;
 
 /* Types */
 module MatchResult = Matchers.Types.MatchResult;
