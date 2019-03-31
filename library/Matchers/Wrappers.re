@@ -10,7 +10,7 @@ let compareScores =
       scoreTuple2: (option(Types.MatchResult.t), string),
     ) => {
   let score1Better = (-1);
-  let score2Better = (1);
+  let score2Better = 1;
   let scoreEqual = 0;
 
   let finalScore = ref(scoreEqual);
@@ -72,7 +72,10 @@ let fuzzySortArray =
     (inputs: array(string), query: string, comparer: fuzzyMatcher) => {
   let scoreArray =
     Array.map(item => (comparer(~line=item, ~pattern=query), item), inputs);
-  Array.fast_sort((item1, item2) => compareScores(item1, item2), scoreArray);
+  Array.fast_sort(
+    (item1, item2) => compareScores(item1, item2),
+    scoreArray,
+  );
 
   Array.map(item => snd(item), scoreArray);
 };
@@ -81,7 +84,11 @@ let fuzzySortList =
     (inputs: list(string), query: string, comparer: fuzzyMatcher) => {
   let scoreList =
     List.map(item => (comparer(~line=item, ~pattern=query), item), inputs);
-  let sortedList =List.fast_sort((item1, item2) => compareScores(item1, item2), scoreList);
+  let sortedList =
+    List.fast_sort(
+      (item1, item2) => compareScores(item1, item2),
+      scoreList,
+    );
 
   List.map(item => snd(item), sortedList);
 };

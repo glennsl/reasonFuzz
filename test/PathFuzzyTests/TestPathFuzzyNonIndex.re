@@ -71,7 +71,8 @@ describe("Path : Match scores should be correct.", ({test, _}) => {
   test("Works for large input", ({expect}) => {
     let testPattern = "quickOpenScore";
 
-    let resultArray = fuzzySortArray(TestArray.testInput, testPattern, pathFuzzyMatch);
+    let resultArray =
+      fuzzySortArray(TestArray.testInput, testPattern, pathFuzzyMatch);
 
     expect.equal(
       resultArray[0],
@@ -82,7 +83,8 @@ describe("Path : Match scores should be correct.", ({test, _}) => {
   test("Works for Oni src input", ({expect}) => {
     let testPattern = "token";
 
-    let resultArray = fuzzySortArray(TestArray.oniTestInput, testPattern, pathFuzzyMatch);
+    let resultArray =
+      fuzzySortArray(TestArray.oniTestInput, testPattern, pathFuzzyMatch);
 
     expect.equal(resultArray[0], "src/editor/Model/Tokenizer.re");
   });
@@ -90,7 +92,8 @@ describe("Path : Match scores should be correct.", ({test, _}) => {
   test("Work for even larger input", ({expect}) => {
     let testPattern = "gpio-regulator";
 
-    let resultArray = fuzzySortArray(TestArray.linuxTest, testPattern, pathFuzzyMatch);
+    let resultArray =
+      fuzzySortArray(TestArray.linuxTest, testPattern, pathFuzzyMatch);
 
     expect.equal(resultArray[0], "./drivers/regulator/gpio-regulator.c");
   });
